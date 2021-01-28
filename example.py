@@ -8,7 +8,7 @@
 # The basic example reads in the 100 data points from the 
 # simulated data file PeriodHighPrecision.dat and 
 # does a chi-squared fit using the uncertainties from the file.
-# Models 8,9,10,11 annd 12 are all reasonable models to test.
+# Models 8,9,10,11 and 12 are all reasonable models to test.
 #
 # Note the syntax for fixing parameters.
 # In addition to the normal chi-squared fit, the deviations are also 
@@ -54,6 +54,7 @@ else:
       y_err = np.full(x_data.shape, errorval)
 
 # 2. Secondly specify the fit
+# Need to specify the model, reasonable starting values, and whether parameters are fixed.
 if fitchoice<=4:
    lsq = LsqDriver(mf.linemodel, x_data, y_data, y_err)
    if fitchoice==1:
@@ -76,16 +77,16 @@ elif fitchoice==9:
 elif fitchoice<=12:
 # This is with the correct model, but with 3 parameters fitted to the data
    lsq = LsqDriver(pmf.pendulumT3, x_data, y_data, y_err)
-   if fitchoice==10:
+   if fitchoice==10: # fit (g, theta0, beta)
       m = Minuit(lsq, g=9.8, L=1.5, theta0deg=50.0, beta=0.98, fix_L=True, pedantic=True, print_level=2, errordef=1.0)
-   elif fitchoice==11:
+   elif fitchoice==11: # fit (L, theta0, beta)
       m = Minuit(lsq, g=9.81, L=1.4, theta0deg=50.0, beta=0.98, fix_g=True, pedantic=True, print_level=2, errordef=1.0)
    elif fitchoice==12:
 # This is the truth model (all parameters fixed)
       m = Minuit(lsq, g=9.81, L=1.5, theta0deg=60.0, beta=0.98, fix_g=True, fix_L=True, fix_theta0deg=True, 
                  fix_beta=True, pedantic=True, print_level=2, errordef=1.0)
 
-# 3. Setup plotting customization
+# 3. Add some plotting customization
 SMALL_SIZE = 20
 MEDIUM_SIZE = 26
 BIGGER_SIZE = 32
@@ -158,7 +159,7 @@ if nfitted > 0:  # Likewise only do this if there are free parameters
    print(' ')
 
 # 10. Use fitted parameter values to evaluate Run Test statistic
-rpval = lsq.runspvalue(*m.values.values())
+rpval = lsq.runspvalue(*m.values.values())  # this is a method in MyLeastSquares.py
 print('Observed run test p-value (%) = ',rpval)
 
 # 11. Combined test assuming that the two tests (chi-squared and run test) 
