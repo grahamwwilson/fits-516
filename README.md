@@ -9,3 +9,5 @@ python example.py
 The code uses the supplied model files: mymodels.py, pendulummodels.py 
 and the fitting class LeastSquares (in MyLeastSquares.py).
 Provided is an example data set, PeriodHighPrecision.dat.
+
+example.out is the output you should obtain

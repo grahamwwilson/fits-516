@@ -1,0 +1,91 @@
+VariableMetric: start iterating until Edm is < 0.0002
+VariableMetric: Initial state   - FCN =   203627535932.5 Edm =  8.02456e+10 NCalls =     52
+VariableMetric: Iteration #   0 - FCN =   203627535932.5 Edm =  8.02456e+10 NCalls =     52
+VariableMetric: Iteration #   1 - FCN =   141138991431.4 Edm =  5.98199e+10 NCalls =     60
+VariableMetric: Iteration #   2 - FCN =   19024733836.31 Edm =   1.8277e+09 NCalls =     70
+VariableMetric: Iteration #   3 - FCN =   16948436013.23 Edm =  1.35185e+08 NCalls =     78
+VariableMetric: Iteration #   4 - FCN =   16635681196.01 Edm =  1.43223e+08 NCalls =     86
+VariableMetric: Iteration #   5 - FCN =   12547394253.94 Edm =  1.05315e+09 NCalls =     98
+VariableMetric: Iteration #   6 - FCN =   11172804144.03 Edm =  2.52263e+09 NCalls =    107
+VariableMetric: Iteration #   7 - FCN =   3624195110.579 Edm =  1.05681e+09 NCalls =    120
+VariableMetric: Iteration #   8 - FCN =       1269201313 Edm =  1.31945e+09 NCalls =    128
+VariableMetric: Iteration #   9 - FCN =   813849202.8667 Edm =  2.68226e+08 NCalls =    136
+VariableMetric: Iteration #  10 - FCN =   71116551.59461 Edm =  6.49177e+07 NCalls =    144
+VariableMetric: Iteration #  11 - FCN =   4709033.144901 Edm =  3.71958e+06 NCalls =    151
+VariableMetric: Iteration #  12 - FCN =   61794.54830375 Edm =      49358.3 NCalls =    159
+VariableMetric: Iteration #  13 - FCN =   104.6169685698 Edm =      7.81475 NCalls =    167
+VariableMetric: Iteration #  14 - FCN =   96.93438960291 Edm =   0.00325929 NCalls =    174
+VariableMetric: Iteration #  15 - FCN =   96.93122090197 Edm =    3.455e-07 NCalls =    181
+datachoice =  2
+fitchoice  =  11
+Reading errors on y-values from file
+This shows partly how the func_code thing works:
+FuncCode(co_varnames=['g', 'L', 'theta0deg', 'beta'], co_argcount=4)
+┌──────────────────────────────────┬──────────────────────────────────────┐
+│ FCN = 96.93                      │        Nfcn = 181 (181 total)        │
+│ EDM = 3.45e-07 (Goal: 0.0002)    │                                      │
+├───────────────┬──────────────────┼──────────────────────────────────────┤
+│ Valid Minimum │ Valid Parameters │        No Parameters at limit        │
+├───────────────┴──────────────────┼──────────────────────────────────────┤
+│ Below EDM threshold (goal x 10)  │           Below call limit           │
+├───────────────┬──────────────────┼───────────┬─────────────┬────────────┤
+│   Hesse ok    │  Has Covariance  │ Accurate  │  Pos. def.  │ Not forced │
+└───────────────┴──────────────────┴───────────┴─────────────┴────────────┘
+Parameter  g  is fixed 
+Parameter  L  is fitted 
+Parameter  theta0deg  is fitted 
+Parameter  beta  is fitted 
+ 
+A) Hypothesis test: IS THIS A REASONABLE FIT? 
+chi-squared                          :  96.93122090196523
+number of data points                :  100
+total number of fit parameters       :  4  of which  3  are fitted and  1 are fixed
+number of ACTUAL fitted parameters   :  3
+number of degrees of freedom (d.o.f.):  97
+ 
+Observed chi-squared p-value of 48.28702945166518 %
+ 
+B) Parameter Estimation: Given a reasonable fit, what are the model parameters and uncertainties?
+Fitted parameters:
+g = 9.81  (Fixed = True)
+L = 1.500000068144895 +- 2.9607362822472177e-07 
+theta0deg = 59.99988199655271 +- 6.397343358665821e-05 
+beta = 0.9799999942365167 +- 1.1250287680249294e-07 
+ 
+Covariance matrix
+((8.765959333015077e-14, -4.074050155144097e-12, -2.7599304171982326e-14),
+ (-4.074050155144097e-12, 4.09260020486657e-09, -1.4213485047583742e-12),
+ (-2.7599304171982326e-14, -1.4213485047583742e-12, 1.2656897288836903e-14))
+ 
+Correlation Coefficient Matrix
+┌───────────┬───────────────────────────────┐
+│           │         L theta0deg      beta │
+├───────────┼───────────────────────────────┤
+│         L │     1.000    -0.215    -0.829 │
+│ theta0deg │    -0.215     1.000    -0.197 │
+│      beta │    -0.829    -0.197     1.000 │
+└───────────┴───────────────────────────────┘
+ 
+Number of parameters 4
+['g', 'L', 'theta0deg', 'beta']
+Parameter 0 : name = g , value = 9.81
+Parameter 1 : name = L , value = 1.500000068144895
+Parameter 2 : name = theta0deg , value = 59.99988199655271
+Parameter 3 : name = beta , value = 0.9799999942365167
+ 
+Normalized Residuals :      1.12    0.19    1.27   -0.89   -1.09   -1.12    1.66    1.51   -0.25   -1.81   -1.36   -1.48    0.29   -1.25   -0.92   -0.23    1.23   -1.47    2.83   -0.92    0.60    1.52    0.17    1.45    0.71   -0.47   -1.76   -0.14   -0.98    0.29    0.24    0.88   -1.15    0.87    0.94   -1.65    1.17   -0.34    1.03    0.06    1.39   -0.34    1.09    1.65    0.17   -0.51   -0.22   -1.37    0.45   -1.79   -0.29   -0.73    0.48    0.76   -0.11    0.34   -1.26    0.05   -0.27    0.14    0.61   -0.01    0.89   -0.00   -0.22   -1.48    0.06   -0.11   -2.23    0.65    0.03    0.34    1.02    0.18    0.68    0.34   -1.14    0.41   -1.75    0.06   -0.58    0.77   -1.77   -0.56    0.89    0.89    0.18   -0.49   -0.53    1.23    1.22    1.08   -0.39   -0.63    0.34    0.28   -0.82   -0.96    1.26   -0.12
+ 
+                                   RUN TEST STATISTICS 
+ 
+Residual signs :  1110001100001000101011111000011101101011101110001000110101011010001001111111010101001110011100110010
+Nbins                     :  100
+npos                      :  53
+number of runs, r         :  52
+E(r)                      :  50.82
+V(r)                      :  24.56780202020202
+z (sigma)                 :  0.23806681156249798
+p-value (%) normal approx :  59.408536234635264
+Run test p-value for robs <=  52  is  63.27260181479417 (%)
+ 
+Observed run test p-value (%) =  63.27260181479417
+Combined p-value of chi-squared and run-test (%) =  66.77927486839201 (uses continuous approximation)
