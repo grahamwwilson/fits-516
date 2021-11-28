@@ -1,0 +1,45 @@
+graham:~/fits-516$ diff example.py oldexample.py
+
+< file is the new iminuit2 version (corrections are only applied to currently executed code ..)
+> file is the old iminuit1 version.
+Hopefully there is some way to simply specify all the parameter values like the previous *m.values.values()
+rather than having to list all of them (and know how many of them there are).
+
+The iminuit2 changes are as follows.
+1. The fixed, print_level and errordef quantities are no longer in the constructors.
+2. The pedantic option has also been removed.
+3. Use covariance rather than matrix
+4. values "now behaves like an array instead of like a dict"
+
+85,90c87,88
+<    elif fitchoice==11: # fit (L, theta0, beta):
+<       m = Minuit(lsq, g=9.81, L=1.4, theta0deg=50.0, beta=0.98)
+<       m.fixed["g"] = True
+<       m.print_level = 2
+<       m.errordef = 1.0
+< # iminuit1 - syntax     m = Minuit(lsq, g=9.81, L=1.4, theta0deg=50.0, beta=0.98, fix_g=True, pedantic=True, print_level=2, errordef=1.0)
+---
+>    elif fitchoice==11: # fit (L, theta0, beta)
+>       m = Minuit(lsq, g=9.81, L=1.4, theta0deg=50.0, beta=0.98, fix_g=True, pedantic=True, print_level=2, errordef=1.0)
+
+161,163c159,161
+< #   print('Covariance matrix')
+< #   pprint(m.matrix())
+< #   print(' ')
+---
+>    print('Covariance matrix')
+>    pprint(m.matrix())
+>    print(' ')
+165,166c163
+< #   print(m.matrix(correlation=True))
+<    print(m.covariance.correlation())
+---
+>    print(m.matrix(correlation=True))
+170c167
+< rpval = lsq.runspvalue(m.values[0], m.values[1], m.values[2], m.values[3])  # this is a method in MyLeastSquares.py
+---
+> rpval = lsq.runspvalue(*m.values.values())  # this is a method in MyLeastSquares.py
+192,193c189
+< #   y_model = pmf.pendulumT3(x_data, *m.values.values())
+<    y_model = pmf.pendulumT3(x_data, m.values[0], m.values[1], m.values[2], m.values[3])
+

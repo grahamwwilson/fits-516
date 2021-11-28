@@ -16,10 +16,7 @@
 #
 #                   Graham W. Wilson,   28-JAN-2021
 #
-# Update at least the main example to work with iminuit2. 
-# Currently tested with iminuit 2.8.4.
-# See iminuit_Upgrade_Notes.txt for pointers to things that still 
-# will need to be changed for other examples.
+# Update 28-NOV-2021. This is the version that works with iminuit 1.5.4.
 # 
 from matplotlib import pyplot as plt
 import numpy as np
@@ -87,12 +84,8 @@ elif fitchoice<=12:
    lsq = LsqDriver(pmf.pendulumT3, x_data, y_data, y_err)
    if fitchoice==10: # fit (g, theta0, beta)
       m = Minuit(lsq, g=9.8, L=1.5, theta0deg=50.0, beta=0.98, fix_L=True, pedantic=True, print_level=2, errordef=1.0)
-   elif fitchoice==11: # fit (L, theta0, beta):
-      m = Minuit(lsq, g=9.81, L=1.4, theta0deg=50.0, beta=0.98)
-      m.fixed["g"] = True
-      m.print_level = 2
-      m.errordef = 1.0
-# iminuit1 - syntax     m = Minuit(lsq, g=9.81, L=1.4, theta0deg=50.0, beta=0.98, fix_g=True, pedantic=True, print_level=2, errordef=1.0)
+   elif fitchoice==11: # fit (L, theta0, beta)
+      m = Minuit(lsq, g=9.81, L=1.4, theta0deg=50.0, beta=0.98, fix_g=True, pedantic=True, print_level=2, errordef=1.0)
    elif fitchoice==12:
 # This is the truth model (all parameters fixed)
       m = Minuit(lsq, g=9.81, L=1.5, theta0deg=60.0, beta=0.98, fix_g=True, fix_L=True, fix_theta0deg=True, 
@@ -142,7 +135,7 @@ print('A) Hypothesis test: IS THIS A REASONABLE FIT? ')
 print('chi-squared                          : ', m.fval)
 print('number of data points                : ', len(y_data))
 print('total number of fit parameters       : ', nfitted+nfixed, 
-      ' of which ',nfitted,' are/is fitted and ',nfixed,'are/is fixed')
+      ' of which ',nfitted,' are fitted and ',nfixed,'are fixed')
 print('number of ACTUAL fitted parameters   : ', nfitted)
 ndof = len(y_data)- nfitted
 print('number of degrees of freedom (d.o.f.): ', ndof)
@@ -163,16 +156,15 @@ for p in m.parameters:
 print(' ')
 
 if nfitted > 0:  # Likewise only do this if there are free parameters
-#   print('Covariance matrix')
-#   pprint(m.matrix())
-#   print(' ')
+   print('Covariance matrix')
+   pprint(m.matrix())
+   print(' ')
    print('Correlation Coefficient Matrix')
-#   print(m.matrix(correlation=True))
-   print(m.covariance.correlation())
+   print(m.matrix(correlation=True))
    print(' ')
 
 # 10. Use fitted parameter values to evaluate Run Test statistic
-rpval = lsq.runspvalue(m.values[0], m.values[1], m.values[2], m.values[3])  # this is a method in MyLeastSquares.py
+rpval = lsq.runspvalue(*m.values.values())  # this is a method in MyLeastSquares.py
 print('Observed run test p-value (%) = ',rpval)
 
 # 11. Combined test assuming that the two tests (chi-squared and run test) 
@@ -194,9 +186,7 @@ elif fitchoice==8 :
 elif fitchoice==9 :
    y_model = pmf.pendulumT2(x_data, *m.values.values())
 elif fitchoice>=10 and fitchoice<=12 :
-#   y_model = pmf.pendulumT3(x_data, *m.values.values())
-   y_model = pmf.pendulumT3(x_data, m.values[0], m.values[1], m.values[2], m.values[3])
-#   y_model = pmf.pendulumT3(x_data, m.values[0:3])
+   y_model = pmf.pendulumT3(x_data, *m.values.values())
 
 y_dev = y_data - y_model    # deviations (data - fit-model)
 
